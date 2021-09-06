@@ -13,3 +13,16 @@ VALUES
     ('Emilia', 'Airheart', 'Chief Accountant', 'Finance', 250000, 'Ada Lovelace'),
     ('Marie', 'LaRie', 'Accountant', 'Finance', 85000, 'Emilia Airheart'),
     ('Brandon', 'Johnson', 'Accountant', 'Finance', 85000, 'Emilia Airheart');
+
+INSERT INTO roles (title_name, salary)
+VALUES
+    ('CEO', 250000),
+    ('Manager', 250000),
+    ('Salesperson', 85000),
+    ('Legal Team Lead', 250000),
+    ('Legal Team', 150000),
+    ('Chief Engineer', 250000),
+    ('Engineer', 85000),
+    ('Software Engineer', 85000),
+    ('Chieft Accountant', 250000),
+    ('Accountant', 85000);

@@ -2,6 +2,9 @@ const mysql = require("mysql2");
 const cTable = require("console.table");
 const inquirer = require("inquirer");
 
+// Display App Title
+console.log("Welcome to Employee Tracker!")
+
 initQuestions();
 // create the connection to the database
 const db = mysql.createConnection(
@@ -14,16 +17,7 @@ const db = mysql.createConnection(
   console.log("Connected to the employeeTracker database.")
 );
 
-// simple query
-// db.query("SELECT * FROM employees", (err, rows) => {
-//   if (err) {
-//     console.log("error: ", err.message);
-//     return;
-//   } else {
-//     console.table("hi");
-//     // initQuestions();
-//   }
-// });
+console.log("Welcome to Employee Tracker!");
 
 async function initQuestions() {
   inquirer
@@ -47,8 +41,19 @@ async function initQuestions() {
       console.log(answer.firstChoice);
       if (answer.firstChoice === "View All Departments") {
         console.log("You chose: View All Departments", answer.firstChoice);
-        mysql = "SELECT * FROM employees;";
-        console.table(mysql);
+        // const sql = "SELECT * FROM employees;";
+        // console.table(mysql);
+
+        // simple query
+        db.query("SELECT * FROM employees", (err, rows) => {
+          if (err) {
+            console.log("error: ", err.message);
+            return;
+          } else {
+            console.table(rows);
+            initQuestions();
+          }
+        });
       } else if (answer.firstChoice === "View All Roles") {
         console.log("You chose: View All Roles!", answer.firstChoice);
       } else if (answer.firstChoice === "View All Employees") {
@@ -64,5 +69,3 @@ async function initQuestions() {
       }
     });
 }
-
-// initQuestions();
