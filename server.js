@@ -3,7 +3,7 @@ const cTable = require("console.table");
 const inquirer = require("inquirer");
 
 // Display App Title
-console.log("Welcome to Employee Tracker!")
+console.log("Welcome to Employee Tracker!");
 
 initQuestions();
 // create the connection to the database
@@ -40,12 +40,24 @@ async function initQuestions() {
     .then((answer) => {
       console.log(answer.firstChoice);
       if (answer.firstChoice === "View All Departments") {
-        console.log("You chose: View All Departments", answer.firstChoice);
+        // console.log("You chose: View All Departments", answer.firstChoice);
         // const sql = "SELECT * FROM employees;";
         // console.table(mysql);
 
-        // simple query
+        // Displays the employes table
         db.query("SELECT * FROM employees", (err, rows) => {
+          if (err) {
+            console.log("error: ", err.message);
+            return;
+          } else {
+            console.table(rows);
+            // places call to initQuestions so the user can select their next action
+            initQuestions();
+          }
+        });
+      } else if (answer.firstChoice === "View All Roles") {
+        // console.log("You chose: View All Roles!", answer.firstChoice);
+        db.query("SELECT * FROM roles", (err, rows) => {
           if (err) {
             console.log("error: ", err.message);
             return;
@@ -54,10 +66,18 @@ async function initQuestions() {
             initQuestions();
           }
         });
-      } else if (answer.firstChoice === "View All Roles") {
-        console.log("You chose: View All Roles!", answer.firstChoice);
       } else if (answer.firstChoice === "View All Employees") {
         console.log("You chose: View All Employees", answer.firstChoice);
+
+        db.query("SELECT first_name, last_name FROM employees", (err, rows) => {
+          if (err) {
+            console.log("error: ", err.message);
+            return;
+          } else {
+            console.table(rows);
+            initQuestions();
+          }
+        });
       } else if (answer.firstChoice === "Add A Department") {
         console.log("You chose Add A Department!", answer.firstChoice);
       } else if (answer.firstChoice === "Add A Role") {
