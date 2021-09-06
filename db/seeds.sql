@@ -26,3 +26,11 @@ VALUES
     ('Software Engineer', 85000),
     ('Chieft Accountant', 250000),
     ('Accountant', 85000);
+
+INSERT INTO department (department_name)
+VALUES 
+    ("Management"),
+    ("Sales"),
+    ("Legal"),
+    ("Engineering"),
+    ("Finance");
