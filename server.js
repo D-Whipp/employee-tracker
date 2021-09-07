@@ -120,6 +120,7 @@ async function initQuestions() {
                   console.log("error: ", err.message);
                   return;
                 } else {
+                  // using this code block to display the table with it's changes
                   db.query("SELECT * FROM department", (err, rows) => {
                     if (err) {
                       console.log("error: ", err.message);
@@ -150,6 +151,63 @@ async function initQuestions() {
         // );
       } else if (answer.firstChoice === "Add A Role") {
         console.log("You chose Add A Role: ", answer.firstChoice);
+
+        inquirer
+          .prompt([
+            {
+              type: "input",
+              name: "roleName",
+              message: "Enter the Role you'd like to add: (Required)",
+              validate: (answer) => {
+                if (answer) {
+                  return true;
+                } else {
+                  console.log("Enter the Role you'd like to add: (Required)");
+                  return false;
+                }
+              },
+            },
+            {
+              name: "salaryOption",
+              type: "list",
+              message: "How much should the new role be paid?: ",
+              choices: [250000, 150000, 85000],
+            },
+            {
+              name: "roleOption",
+              type: "list",
+              message:
+                "Select the Role's Department: 1: Management, 2: Sales, 3: Legal, 4: Engineering, 5: Finance, 6: Other",
+              choices: [1, 2, 3, 4, 5, 6],
+            },
+          ])
+          .then(function (data) {
+            console.log(data);
+            db.query(
+              `INSERT INTO roles (title, salary, department_id) VALUES(?, ?, ?)`,
+              [data.roleName, data.salaryOption, data.roleOption],
+              (err, rows) => {
+                if (err) {
+                  console.log("error: ", err.message);
+                  return;
+                } else {
+                  console.table(rows);
+
+                  //  Using this block of code to view the table with it's changes
+                  db.query("SELECT * FROM roles", (err, rows) => {
+                    if (err) {
+                      console.log("error: ", err.message);
+                      return;
+                    } else {
+                      console.table(rows);
+                      // I use this to allow the user to select more options with the app
+                      initQuestions();
+                    }
+                  });
+                }
+              }
+            );
+          });
       } else if (answer.firstChoice === "Add An Employee") {
         console.log("You chose Add An Employee: ", answer.firstChoice);
       } else if (answer.firstChoice === "Update An Employee Role") {

@@ -5,7 +5,8 @@ VALUES
     ("Sales"),
     ("Legal"),
     ("Engineering"),
-    ("Finance");
+    ("Finance"),
+    ("Other");
 
 INSERT INTO roles (title, salary, department_id)
 VALUES
