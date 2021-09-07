@@ -18,7 +18,7 @@ VALUES
     ('Chief Engineer', 250000, 4),
     ('Engineer', 85000, 4),
     ('Software Engineer', 85000, 4),
-    ('Chieft Accountant', 250000, 5),
+    ('Chief Accountant', 250000, 5),
     ('Accountant', 85000, 5);
 
 INSERT INTO employees (first_name, last_name, role_id, manager)
