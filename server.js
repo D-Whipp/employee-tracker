@@ -68,24 +68,15 @@ async function initQuestions() {
         });
       } else if (answer.firstChoice === "View All Roles") {
         // console.log("You chose: View All Roles!", answer.firstChoice);
-        db.query(
-          `SELECT roles.*, department.department_name
-          AS departement_name 
-          FROM roles
-          LEFT JOIN department
-          ON roles.title_name = department.id
-          WHERE roles.id=?`,
-          "*",
-          (err, rows) => {
-            if (err) {
-              console.log("error: ", err.message);
-              return;
-            } else {
-              console.table(rows);
-              initQuestions();
-            }
+        db.query("SELECT * FROM roles", (err, rows) => {
+          if (err) {
+            console.log("error: ", err.message);
+            return;
+          } else {
+            console.table(rows);
+            initQuestions();
           }
-        );
+        });
       } else if (answer.firstChoice === "View All Employees") {
         // console.log("You chose: View All Employees", answer.firstChoice);
 
