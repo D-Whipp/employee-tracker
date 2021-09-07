@@ -43,7 +43,7 @@ async function initQuestions() {
       // If the user chooses to view the employee table
       if (answer.firstChoice === "View Employee Table") {
         // Then get everything from the employee table
-        db.query("SELECT * FROM employees", (err, rows) => {
+        db.query("SELECT ", 1, (err, rows) => {
           if (err) {
             // first check for an error
             // if there's an error tell me what it is
@@ -75,7 +75,7 @@ async function initQuestions() {
           LEFT JOIN department
           ON roles.title_name = department.id
           WHERE roles.id=?`,
-          1,
+          "*",
           (err, rows) => {
             if (err) {
               console.log("error: ", err.message);
