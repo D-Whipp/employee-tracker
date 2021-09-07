@@ -318,6 +318,53 @@ async function initQuestions() {
           });
       } else if (answer.firstChoice === "Update An Employee Role") {
         console.log("You chose Update An Employee Role: ", answer.firstChoice);
+
+        inquirer
+          .prompt([
+            {
+              name: "updateEmployeeID",
+              type: "input",
+              message: "Enter the ID from the Employee Table: (Required)",
+              validate: (answer) => {
+                if (answer) {
+                  return true;
+                } else {
+                  console.log(
+                    "Enter the ID from the Employee Table: (Required)"
+                  );
+                  return false;
+                }
+              },
+            },
+            {
+              name: "updateEmployeeName",
+              type: "input",
+              message: "Enter the Employee's Name: (Required)",
+              validate: (answer) => {
+                if (answer) {
+                  return;
+                } else {
+                  console.log("Enter the Employee's Name: (Required)");
+                }
+                return false;
+              },
+            },
+          ])
+          .then(function (data) {
+            console.log(data);
+            db.query(
+              `UPDATE employees SET first_name = ? WHERE id = ?`,
+              [data.updateEmployeeName, updateEmployeeID],
+              (err, rows) => {
+                if (err) {
+                  console.log("error: ", err.message);
+                  return;
+                } else {
+                  initQuestions();
+                }
+              }
+            );
+          });
       }
     });
 }
