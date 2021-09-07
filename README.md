@@ -12,11 +12,13 @@ To install employeetracker your must download the source code. Once the source c
 
 ![Screenshot](assets/img/employeetrackerscreenshot.png)
 
+![Video](https://drive.google.com/file/d/1WrKE1dAuzXOLaLViU02xAnXPbrfcP4Nm/view)
+
 Use employee-tracker by navigating to it's root directory and entering node server. Once node server is entered the user will be presented with a list of choices. Depending on the choice, the user will then be given data or prompted to answer further questions.
 
 ## License
 
-[MIT](https://choosealicense.com/licenses/mit/)
+![MIT](https://choosealicense.com/licenses/mit/)
 
 ## Badges
 
