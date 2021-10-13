@@ -5,7 +5,7 @@ const inquirer = require("inquirer");
 // Display App Title
 console.log("Welcome to Employee Tracker!");
 
-initQuestions();
+// initQuestions();
 // create the connection to the database
 const db = mysql.createConnection(
   {
@@ -19,7 +19,7 @@ const db = mysql.createConnection(
 
 console.log("Welcome to Employee Tracker!");
 
-async function initQuestions() {
+function initQuestions() {
   inquirer
     .prompt([
       {
@@ -210,7 +210,7 @@ async function initQuestions() {
             );
           });
       } else if (answer.firstChoice === "Add An Employee") {
-        console.log("You chose Add An Employee: ", answer.firstChoice);
+        // console.log("You chose Add An Employee: ", answer.firstChoice);
 
         inquirer
           .prompt([
@@ -219,11 +219,10 @@ async function initQuestions() {
               type: "input",
               message: "Enter Employee's First Name: (Required)",
               validate: (answer) => {
-                if (answer) {
-                  return true;
+                if (!answer) {
+                  console.log("This field is required.");
                 } else {
-                  console.log("Enter Employee's First Name: (Required)");
-                  return false;
+                  return true;
                 }
               },
             },
@@ -232,10 +231,9 @@ async function initQuestions() {
               type: "input",
               message: "Enter Employee's Last Name: (Required)",
               validate: (answer) => {
-                if (answer) {
-                  return true;
+                if (!answer) {
+                  console.log("This field is required.");
                 } else {
-                  console.log("Enter Employee's Last Name: (Required)");
                   return false;
                 }
               },
@@ -360,7 +358,8 @@ async function initQuestions() {
                   console.log("error: ", err.message);
                   return;
                 } else {
-                  initQuestions();
+                  console.log("END");
+                  // initQuestions();
                 }
               }
             );
@@ -368,3 +367,5 @@ async function initQuestions() {
       }
     });
 }
+
+initQuestions();
